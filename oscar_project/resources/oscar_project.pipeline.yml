@@ -1,0 +1,13 @@
+# The main pipeline for oscar_project
+resources:
+  pipelines:
+    oscar_project_pipeline:
+      name: oscar_project_pipeline
+      catalog: workspace
+      schema: oscar_project_${bundle.target}
+      libraries:
+        - notebook:
+            path: ../src/dlt_pipeline.ipynb
+
+      configuration:
+        bundle.sourcePath: ${workspace.file_path}/src
