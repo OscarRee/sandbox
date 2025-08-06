@@ -21,7 +21,7 @@ payload = {
 }
 
 # COMMAND ----------
-response = requests.get(url, params=payload)
+response = requests.post(url, json=payload)
 response.raise_for_status()
 data = response.json()
 
