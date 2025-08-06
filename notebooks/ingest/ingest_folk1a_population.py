@@ -19,10 +19,6 @@ response = requests.post(url, json=payload)
 response.raise_for_status()
 csv_data = response.text
 
-# COMMAND ----------
-
-# COMMAND ----------
-
 load_date = datetime.now().strftime("%Y-%m-%d")
 filename = f"/Volumes/ingest/default/raw_folk1a/ingest_date={load_date}/data.csv"
 
