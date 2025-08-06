@@ -4,20 +4,24 @@ from datetime import datetime
 from pyspark.sql import SparkSession
 
 # COMMAND ----------
+url = "https://api.statbank.dk/v1/data/FOLK1A/CSV"
 
-url = "https://api.statbank.dk/v1/data/FOLK1A/CSV?OMRÅDE=101,147,265&KØN=0&ALDER=IALT&TID=2023K1,2023K2,2023K3,2023K4"
-params = {
-    "OMRÅDE": "101,147,265",
-    "KØN": "0",
-    "ALDER": "IALT",
-    "TID": "2023K1,2023K2,2023K3,2023K4"
+payload = {
+    "table": "FOLK1A",
+    "format": "CSV",
+    "variables": [
+        {"code": "OMRÅDE", "values": ["101", "147", "265"]},
+        {"code": "KØN", "values": ["0"]},
+        {"code": "ALDER", "values": ["IALT"]},
+        {"code": "TID", "values": ["2023K1", "2023K2", "2023K3", "2023K4"]}
+    ]
 }
 
-# COMMAND ----------
-
-response = requests.get(url, json=params)
+response = requests.post(url, json=payload)
 response.raise_for_status()
 csv_data = response.text
+
+# COMMAND ----------
 
 # COMMAND ----------
 
