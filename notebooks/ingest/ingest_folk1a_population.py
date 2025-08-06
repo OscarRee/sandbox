@@ -11,8 +11,6 @@ payload = {
     "format": "CSV",
     "variables": [
         {"code": "OMRÅDE", "values": ["101", "147", "265"]},
-        {"code": "KØN", "values": ["0"]},
-        {"code": "ALDER", "values": ["IALT"]},
         {"code": "TID", "values": ["2023K1", "2023K2", "2023K3", "2023K4"]}
     ]
 }
