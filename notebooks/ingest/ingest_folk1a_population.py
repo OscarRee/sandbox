@@ -24,7 +24,7 @@ csv_data = response.text
 # COMMAND ----------
 
 load_date = datetime.now().strftime("%Y-%m-%d")
-filename = f"/Volumes/sandbox/ingest/folk1a_population/ingest_date={load_date}/data.csv"
+filename = f"/Volumes/ingest/default/raw_folk1a/ingest_date={load_date}/data.csv"
 
 with open("/tmp/folk1a.csv", "w", encoding="utf-8") as f:
     f.write(csv_data)
