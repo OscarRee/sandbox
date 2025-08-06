@@ -26,9 +26,6 @@ csv_data = response.text
 load_date = datetime.now().strftime("%Y-%m-%d")
 filename = f"/Volumes/ingest/default/raw_folk1a/ingest_date={load_date}/data.csv"
 
-with open("/tmp/folk1a.csv", "w", encoding="utf-8") as f:
-    f.write(csv_data)
-
-dbutils.fs.mv("file:/tmp/folk1a.csv", f"{filename}", True)
+dbutils.fs.put(filename, csv_data, True)
 
 print(f" raw json saved to {filename}")
