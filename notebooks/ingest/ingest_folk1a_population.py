@@ -1,14 +1,11 @@
 # Databricks notebook source
-# ingest: ingest raw json response from statbank api
-
-# COMMAND ----------
 import requests
-import json
 from datetime import datetime
 from pyspark.sql import SparkSession
 
 # COMMAND ----------
-url = "https://api.statbank.dk/v1/data/EJENDOMSSALG1/JSONSTAT"
+
+url = "https://api.statbank.dk/v1/data/FOLK1A/CSV?OMRÅDE=101,147,265&KØN=0&ALDER=IALT&TID=2023K1,2023K2,2023K3,2023K4"
 payload = {
     "table": "EJENDOMSSALG1",
     "format": "JSONSTAT",
@@ -21,11 +18,29 @@ payload = {
 }
 
 # COMMAND ----------
+
 response = requests.post(url, json=payload)
-response.raise_for_status()
-data = response.json()
+print(response.status_code)
+print(response.text[:500])
+
+#response.raise_for_status()
+#data = response.json()
 
 # COMMAND ----------
+
+# COMMAND ----------
+import requests, pprint
+
+meta = requests.get(
+    "https://api.statbank.dk/v1/tableinfo/EJEN77?format=JSON&lang=en"
+).json()
+
+for var in meta:
+    print(var["id"], "→ sample values:", var["values"][:5])
+
+
+# COMMAND ----------
+
 spark = SparkSession.builder.GetOrCreate()
 load_date = datetime.now().strftime("%Y-%m-%d")
 filename = f"/Volumes/sandbox/ingest/statbank_housing/ingest_date={load_date}/response.json"
