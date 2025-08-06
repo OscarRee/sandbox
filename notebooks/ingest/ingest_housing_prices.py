@@ -1,4 +1,4 @@
-# databricks notebook source
+# Databricks notebook source
 # ingest: ingest raw json response from statbank api
 
 # COMMAND ----------
