@@ -10,8 +10,3 @@ terraform {
 provider "databricks" {
     host = var.databricks_host
 }
-
-resource "databricks_schema" "ingest_statbank" {
-    catalog_name = databricks_catalog.ingest.name
-    name         = "statbank"
-}
